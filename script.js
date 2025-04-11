@@ -43,3 +43,14 @@ function calculateRecommendedCapacity(velocity, teamSize, oooDays, holidays){
   document.getElementById("maxWithVariance").textContent = `Max Available Capacity: ${adjustedQuarterCapacity.toFixed(1)}`;
   document.getElementById("adjustedWithVariance").textContent = `Available Capacity With Reserve: ${adjustedWithVariance.toFixed(1)}`;
 };
+
+document.getElementById('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Recalculate and update the result values here...
+
+  const results = document.getElementById('results');
+  results.classList.remove('animate');
+  void results.offsetWidth; // Trigger reflow
+  results.classList.add('animate');
+});
