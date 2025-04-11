@@ -27,7 +27,7 @@ document.getElementById('form').addEventListener('submit', function (e) {
 
   document.getElementById('maxQuarterCapacity').textContent = `Max Capacity: ${Math.round(maxQuarterCapacity)} points`;
   document.getElementById('adjustedCapacity').textContent = `Max Available Capacity: ${Math.round(adjustedQuarterCapacity)} points`;
-  document.getElementById('maxWithVariance').textContent = `Max Capacity with Reserve: ${Math.round(maxWithVariance)} points`;
+  //document.getElementById('maxWithVariance').textContent = `Max Capacity with Reserve: ${Math.round(maxWithVariance)} points`;
   document.getElementById('adjustedWithVariance').textContent = `Capacity with Reserve: ${Math.round(adjustedWithVariance)} points`;
 });
 
