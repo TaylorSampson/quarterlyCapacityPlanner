@@ -1,45 +1,33 @@
-// import form data
-const formResults = document.getElementById("form");
+document.getElementById('form').addEventListener('submit', function (e) {
+  e.preventDefault();
 
-let velocity, teamSize, oooDays, holidays;
+  const teamSize = parseInt(document.getElementById('teamSizeInput').value);
+  const oooDays = parseInt(document.getElementById('removeDaysInput').value || 0);
+  const holidays = parseInt(document.getElementById('addHolidaysInput').value || 0);
+  const velocity = parseInt(document.getElementById('velocityInput').value);
 
-// add event listener to form
-formResults.addEventListener("submit", function(event){
-  event.preventDefault(); // prevent form from submitting
-
-  // access form elements
-  velocity = document.getElementById("velocityInput").value;
-  teamSize = document.getElementById("teamSizeInput").value;
-  oooDays = document.getElementById("removeDaysInput").value;
-  holidays = document.getElementById("addHolidaysInput").value;
-
-  calculateRecommendedCapacity(velocity, teamSize, oooDays, holidays);
-});
-
-
-function calculateRecommendedCapacity(velocity, teamSize, oooDays, holidays){
-  
   const sprints = 6;
-  const sprintLength = 10;
-  const maxQuarterCapacity = velocity * sprints; // Calculate max capacity for the quarter (6 sprints)
+  const hoursPerDay = 6;
+  const hoursPerSprintPerPerson = 60;
 
-  // Calculate average points per person and per day
-  const pointsPerPerson = velocity / teamSize;
-  const pointsPerDay = pointsPerPerson / sprintLength;
+  const totalHoursPerSprint = teamSize * hoursPerSprintPerPerson;
+  const totalAvailableHours = totalHoursPerSprint * sprints - (oooDays + holidays) * hoursPerDay;
+  const avgHoursPerPoint = (velocity > 0) ? totalAvailableHours / (velocity * sprints) : 0;
 
-  // Calculate adjustments for OOO days and holidays
-  const oooAdjustment = oooDays * pointsPerDay;
-  const holidayAdjustment = holidays * pointsPerDay * teamSize;
+  const maxQuarterCapacity = (avgHoursPerPoint > 0)
+    ? (totalHoursPerSprint * sprints) / avgHoursPerPoint
+    : 0;
 
-  const totalAdjustments = oooAdjustment + holidayAdjustment; 
-  const adjustedQuarterCapacity = maxQuarterCapacity - totalAdjustments;
+  const adjustedQuarterCapacity = (avgHoursPerPoint > 0)
+    ? totalAvailableHours / avgHoursPerPoint
+    : 0;
 
-  // Apply 20% variance to max and adjusted capacities
   const maxWithVariance = maxQuarterCapacity * 0.8;
   const adjustedWithVariance = adjustedQuarterCapacity * 0.8;
 
-  // Send to UI
-  document.getElementById("maxQuarterCapacity").textContent = `Max Capacity: ${maxQuarterCapacity.toFixed(1)}`;
-  document.getElementById("maxWithVariance").textContent = `Max Available Capacity: ${adjustedQuarterCapacity.toFixed(1)}`;
-  document.getElementById("adjustedWithVariance").textContent = `Available Capacity With Reserve: ${adjustedWithVariance.toFixed(1)}`;
-};
+  document.getElementById('maxQuarterCapacity').textContent = `Max Capacity: ${Math.round(maxQuarterCapacity)} points`;
+  document.getElementById('adjustedCapacity').textContent = `Max Available Capacity: ${Math.round(adjustedQuarterCapacity)} points`;
+  document.getElementById('maxWithVariance').textContent = `Max Capacity with Reserve: ${Math.round(maxWithVariance)} points`;
+  document.getElementById('adjustedWithVariance').textContent = `Capacity with Reserve: ${Math.round(adjustedWithVariance)} points`;
+});
+
