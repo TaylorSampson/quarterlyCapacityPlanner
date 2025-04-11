@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quarterly Capacity Estimator</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="header">
@@ -28,7 +29,7 @@
           <p><b>Description</b>: This should be used for non-reoccurring meetings or other types of events affecting availability. Normal sprint ceremonies and re-occurring meetings should <b>not</b> be added to this section.</p>
 
           <div id="exampleText">
-            <p id="exampleHeader"><b>Example</b></p>
+            <h3 id="exampleHeader"><b>Example</b></h3>
             <div id="exampleDetails">
               <p><b>Engineer 1</b>: 2 days out</p>
               <p><b>Engineer 2</b>: 1 week out</p>
@@ -37,7 +38,7 @@
             </div>
           </div>
 
-            <label for="removeDaysInput">How many days <strong>collectively</strong> should be removed? <input type="number" id="removeDaysInput" min="0" /></label>
+            <label for="removeDaysInput">How many days <i> collectively </i> should be removed? <input type="number" id="removeDaysInput" min="0" /></label>
             <label for="addHolidaysInput">How many <strong>Company Holidays</strong> should be added? <input type="number" id="addHolidaysInput" min="0" /></label>
           <br />
           
@@ -51,10 +52,10 @@
     <div id="results">
       <h2>Recommended Capacity</h2>
       <hr />
-      <p id="maxQuarterCapacity"></p>
-      <p id="adjustedCapacity"></p>
-      <p id="maxWithVariance"></p>
-      <p id="adjustedWithVariance"></p>
+      <p id="maxQuarterCapacity"><strong>Max Capacity:</strong> </p>
+      <p id="maxWithVariance"><strong>Max Available Capacity:</strong> </p>
+      
+      <p id="adjustedWithVariance"><strong>Capacity with Reserve:</strong> </p>
     </div>
   </body>
 </html>
