@@ -1,10 +1,10 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Nunito', sans-serif;
   background: linear-gradient(to bottom, #edf0f2, #f6f8fa);
   color: #545454;
 }
